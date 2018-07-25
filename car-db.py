@@ -4,12 +4,17 @@ def readfile(filename):
     s.close()
     return content
 
+def writetofile(content, filename, mode):
+    s = open(filename, mode)
+    for item in content:
+        s.write(item)
+    s.close()
+
 def decode(filename):
     decoded = {}
     raw = readfile(filename)
     rows = raw.split('\n')
-    prev_pair=''
-    dictionary={}
+    dictionary = {}
     for pair in rows:
 
         if pair:
@@ -24,9 +29,22 @@ def decode(filename):
             else:
                 polozky = pair.split('=')
                 decoded[polozky[0]] = polozky[1]
-                dictionary={}
-            prev_pair = pair
+                dictionary = {}
 
     return decoded
+
+
+def encode(dictionary, filename):
+    encoded = []
+
+    for key, value in dictionary.items():
+        if type(value) == type({}):
+            encoded.append(str(key) + '=')
+            for lkey, lvalue in value:
+                encoded.append(str(lkey) + '=' + str(lvalue))
+        else:
+            encoded.append(str(key) + '=' + str(value))
+
+    return encoded
 
 print(decode('databaze.txt'))
