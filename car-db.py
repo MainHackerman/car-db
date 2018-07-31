@@ -64,37 +64,60 @@ def readDB(db_file):
     return db
 
 
-def addtoDBfile(data, db_file):
-    writetofile(encode(data), db_file, 'a')
+def IDinDB(int_id, db_filename):
+    f = open(db_filename)
+    for row in f:
+        if row == '\n':
+            continue
+        if int(row) == int_id:
+            f.close()
+            return True
+    else:
+        f.close()
+        return False
 
 
-def updateDBfile(db, db_file):
-    writetofile(encode(db), db_file, 'w')
+def rentCar(int_id, rented_db_filename, not_rented_db_filename):
+    if IDinDB(int_id, rented_db_filename):
+        print('Car is rented')
+        return None
+    elif not IDinDB(int_id, not_rented_db_filename):
+        print('ID is not valid')
+        return None
+
+    rented = open(rented_db_filename, 'a')
+    rented.write('\n' + str(int_id))
+    rented.close()
+
+    not_rented = open(not_rented_db_filename)
+    not_rented_list = not_rented.read().split('\n')
+    not_rented.close()
+    print(not_rented_list)
+    not_rented_list.remove(str(int_id))
+
+    not_rented = open(not_rented_db_filename, 'w')
+    for item in not_rented_list:
+        not_rented.write(str(item) + '\n')
+    not_rented.close()
 
 
-def createItem(list_of_keys):
-    newitem = {}
-    for key in list_of_keys:
-
-        if type(key) == type({}):
-            newitem.update({list(key.keys())[0]: {}})
-
-            # ERROR MESSAGE
-            if len(key.keys()) > 1:
-                print('Too many subkeys on one keylist position: {}'.format(list(key.keys())[0]))
-                return {}
-
-            for lkey in list(key.values())[0]:
-                print(lkey)
-                newitem[list(key.keys())[0]].update({lkey: input('Insert value for {} subcategory in {} category'.format(lkey, list(key.keys())[0]))})
-
-        else:
-            newitem.update({key: input('Insert value for {} category'.format(key))})
-
-    return newitem
+def getCar(key, value, db_dict):
+    ID_list = []
+    for car in db_dict.items():
+        for car_item in list(car)[1].items():
+            if type(car_item[1]) == type({}):
+                for car_nested_item in car_item[1].items():
+                    if car_nested_item[0] == str(key) and car_nested_item[1] == str(value):
+                        ID_list.append(list(car)[0])
+            if car_item[0] == str(key) and car_item[1] == str(value):
+                ID_list.append(list(car)[0])
+    return ID_list
 
 
-listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']},'kategorie','cena']
-print(createItem(listofkeys))
-db = readDB('sample_database_availible.txt')
+listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
+db = readDB('not_rented.txt')
 print(len(db.keys()))
+# rentCar(1,'rented.txt','not_rented.txt')
+
+skoda = getCar('znacka', 'mazda', db)
+print(skoda)
