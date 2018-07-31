@@ -7,6 +7,14 @@ Database based on two types of file:
 - Records file
     - file with special structure representing one record in DB.
 
+Program works as DBMS for car rental company database. The program shall manage not rented and rented cars. 
+Proram shall output nice forms with information about cars:
+- not rented cars based on category, brand, consumption, power, year of manufacturing, transmission or fuel type.
+- rented cars based on category, brand, consumption, power, year of manufacturing, transmission or fuel type.
+- ???should perform combined select???
+
+The database files will be provided for the student.  
+
 #### List of records file structure
 - one line one file
 - files shall by named by numbers which represents 
