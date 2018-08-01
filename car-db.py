@@ -55,16 +55,34 @@ def IDinDB(int_id, db_filename):
         f.close()
         return False
 
+def compare(val1, val2, symbol):
+    #<,>,<=,>=, ==
+    if val1.isdigit() and val2.isdigit():
+        val1, val2 = float(val1), float(val2)
+    if symbol == '<':
+        return val1 < val2
+    elif symbol == '>':
+        return val1 > val2
+    elif symbol == '<=':
+        return val1 <= val2
+    elif symbol == '>=':
+        return val1 >= val2
+    elif symbol == '==':
+        return val1 == val2
+    else:
+        print('wrong symbol')
+        return False
 
-def getCar(key, value, db_dict):
+
+def getCar(key, value, comp_symbol, db_dict):
     ID_list = []
     for car in db_dict.items():
         for car_item in list(car)[1].items():
             if type(car_item[1]) == type({}):
                 for car_nested_item in car_item[1].items():
-                    if car_nested_item[0] == str(key) and car_nested_item[1] == str(value):
+                    if car_nested_item[0] == str(key) and compare(car_nested_item[1], str(value), comp_symbol):
                         ID_list.append(list(car)[0])
-            if car_item[0] == str(key) and car_item[1] == str(value):
+            if car_item[0] == str(key) and compare(car_item[1], str(value), comp_symbol):
                 ID_list.append(list(car)[0])
     return ID_list
 
@@ -72,7 +90,6 @@ def getCar(key, value, db_dict):
 listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
 db = readDB('not_rented.txt')
 print(len(db.keys()))
-# rentCar(1,'rented.txt','not_rented.txt')
-
-skoda = getCar('vykon', '75', db)
+print(db)
+skoda = getCar('vykon', '76', '>=', db)
 print(skoda)
