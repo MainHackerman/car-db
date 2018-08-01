@@ -1,6 +1,6 @@
 # car-db
 
-### Funcitionality
+### Functionality
 Database based on two types of file:
 - List of records file
     - Each line - one record file

@@ -5,13 +5,6 @@ def readfile(filename):
     return content
 
 
-def writetofile(content, filename, mode):
-    s = open(filename, mode)
-    for item in content:
-        s.write(item)
-    s.close()
-
-
 def decode(filename):
     decoded = {}
     raw = readfile(filename)
@@ -32,20 +25,6 @@ def decode(filename):
                 dictionary = {}
 
     return decoded
-
-
-def encode(dictionary):
-    encoded = []
-
-    for key, value in dictionary.items():
-        if type(value) == type({}):
-            encoded.append(str(key) + '=')
-            for lkey, lvalue in value:
-                encoded.append(str(lkey) + '=' + str(lvalue))
-        else:
-            encoded.append(str(key) + '=' + str(value))
-
-    return encoded
 
 
 def readDB(db_file):
@@ -77,30 +56,6 @@ def IDinDB(int_id, db_filename):
         return False
 
 
-def rentCar(int_id, rented_db_filename, not_rented_db_filename):
-    if IDinDB(int_id, rented_db_filename):
-        print('Car is rented')
-        return None
-    elif not IDinDB(int_id, not_rented_db_filename):
-        print('ID is not valid')
-        return None
-
-    rented = open(rented_db_filename, 'a')
-    rented.write('\n' + str(int_id))
-    rented.close()
-
-    not_rented = open(not_rented_db_filename)
-    not_rented_list = not_rented.read().split('\n')
-    not_rented.close()
-    print(not_rented_list)
-    not_rented_list.remove(str(int_id))
-
-    not_rented = open(not_rented_db_filename, 'w')
-    for item in not_rented_list:
-        not_rented.write(str(item) + '\n')
-    not_rented.close()
-
-
 def getCar(key, value, db_dict):
     ID_list = []
     for car in db_dict.items():
@@ -119,5 +74,5 @@ db = readDB('not_rented.txt')
 print(len(db.keys()))
 # rentCar(1,'rented.txt','not_rented.txt')
 
-skoda = getCar('znacka', 'mazda', db)
+skoda = getCar('vykon', '75', db)
 print(skoda)
