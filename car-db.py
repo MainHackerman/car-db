@@ -87,9 +87,19 @@ def getCar(key, value, comp_symbol, db_dict):
     return ID_list
 
 
+def getMore(db_dict, *conditions):
+    #One condition shall be tuple including key, value, comp sign
+    matches = []
+    for condition in conditions:
+        matches.append(getCar(condition[0], condition[1], condition[2], db_dict))
+
+    return matches
+
+
 listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
 db = readDB('not_rented.txt')
 print(len(db.keys()))
 print(db)
 skoda = getCar('vykon', '76', '>=', db)
 print(skoda)
+print(getMore(db, ('znacka', 'skoda', '=='), ('vykon', '100', '>')))

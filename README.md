@@ -11,7 +11,7 @@ Program works as DBMS for car rental company database. The program shall manage 
 Proram shall output nice forms with information about cars:
 - not rented cars based on category, brand, consumption, power, year of manufacturing, transmission or fuel type.
 - rented cars based on category, brand, consumption, power, year of manufacturing, transmission or fuel type.
-- ???should perform combined select???
+- **EXTRA** combined select
 
 The database files will be provided for the student.  
 
