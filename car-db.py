@@ -148,15 +148,12 @@ def printResult(list_result, db_dict):
     cont_to_format = getFromat(list_result, db_dict)
     beg = ' VYSLEDEK VASEHO HLEDANI:\n' + 40*'='+'\n'
     row_to_format = ''' |{} : {}| '''
-    cont = []
+    cont_str = ''
     end = 'DEKUJEME ZA VYUZITI NASEHO SYSTEMU'
     for lst in cont_to_format:
         for pair in lst:
-            cont.append(row_to_format.format(*pair))
-        cont.append(40*'=')
-    cont_str = ''
-    for row in cont:
-        cont_str = cont_str + row +'\n'
+            cont_str = cont_str + row_to_format.format(*pair) + '\n'
+        cont_str = cont_str + 40*'='+ '\n'
 
     return beg + cont_str + end
 
