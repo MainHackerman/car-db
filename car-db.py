@@ -56,6 +56,24 @@ def IDinDB(int_id, db_filename):
         return False
 
 
+def addID(int_id, db_filename):
+    f = open(db_filename, 'a')
+    f.write('\n' + str(int_id))
+    f.close()
+
+
+def delID(int_id, db_filename):
+    f = open(db_filename)
+    cont = f.read().split('\n')
+    f.close()
+    cont.remove(str(int_id))
+
+    f = open(db_filename, 'w')
+    for item in cont:
+        f.write(str(item) + '\n')
+    f.close()
+
+
 def rentCar(int_id, rented_db_filename, not_rented_db_filename):
     if IDinDB(int_id, rented_db_filename):
         print('Car is rented')
@@ -64,19 +82,9 @@ def rentCar(int_id, rented_db_filename, not_rented_db_filename):
         print('ID is not valid')
         return None
 
-    rented = open(rented_db_filename, 'a')
-    rented.write('\n' + str(int_id))
-    rented.close()
+    addID(int_id, rented_db_filename)
+    delID(int_id, not_rented_db_filename)
 
-    not_rented = open(not_rented_db_filename)
-    not_rented_list = not_rented.read().split('\n')
-    not_rented.close()
-    not_rented_list.remove(str(int_id))
-
-    not_rented = open(not_rented_db_filename, 'w')
-    for item in not_rented_list:
-        not_rented.write(str(item) + '\n')
-    not_rented.close()
 
 
 def compare(val1, val2, symbol):
