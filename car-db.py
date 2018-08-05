@@ -119,10 +119,12 @@ def getCar(key, value, comp_symbol, db_dict):
     return ID_list
 
 
-def getMore(db_dict, *conditions):
+def getMore(db_dict, conditions):
     #One condition shall be tuple including key, value, comp sign
     matches = []
     for condition in conditions:
+        if not condition:
+            break
         matches.append(getCar(condition[0], condition[1], condition[2], db_dict))
     return matches
 
@@ -163,5 +165,30 @@ print(len(db.keys()))
 print(db)
 skoda = getCar('vykon', '76', '>=', db)
 print(skoda)
-print(getMore(db, ('znacka', 'skoda', '=='), ('vykon', '100', '>')))
+print(getMore(db, [('znacka', 'skoda', '=='), ('vykon', '100', '>')]))
 print(printResult(skoda, db))
+
+options = ['HLEDAT', 'PUJCIT', 'KONEC']
+while True:
+    print('VITEJTE V NASI CAR RENTAL COMPANY')
+    print('MATE NA VYBER, HLEDAT, PUJCIT, KONEC')
+    vyber = input('ZADEJ VOLBU: ').upper()
+    if vyber == options[0]:
+        comp_items = ['POLOŽKA', 'HODNOTA', 'ZNAMENKO']
+        tuples = []
+        while True:
+            tup = ()
+            inp = 0
+            print('Vyhledavani v nasi databazi.\nZadej v jake kategorii hledas co a potom znamenko porovnavani')
+            for item in comp_items:
+                inp = [input('Zadej ' + item + ' :\n')]
+                if inp == ['']:
+                    break
+                tup = tup + tuple(inp)
+                print('tup',tup)
+            tuples.append(tup)
+            if inp == ['']:
+                break
+
+        print(getMore(db, tuples))
+        break
