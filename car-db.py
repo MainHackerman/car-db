@@ -125,8 +125,9 @@ def getMore(db_dict, conditions):
     for condition in conditions:
         if not condition:
             break
-        matches.append(getCar(condition[0], condition[1], condition[2], db_dict))
-    return matches
+        matches.append(set(getCar(condition[0], condition[1], condition[2], db_dict)))
+
+    return list(set.intersection(*matches))
 
 
 def getFromat(list_result, db_dict):
@@ -190,5 +191,6 @@ while True:
             if inp == ['']:
                 break
 
-        print(getMore(db, tuples))
+        s_result = getMore(db, tuples)
+        print(printResult(s_result,db))
         break
