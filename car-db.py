@@ -135,6 +135,7 @@ def getFormat(list_result, db_dict):
     to_format = []
     for result in list_result:
         car = []
+        car.append(tuple(['ID', result]))
         car_record = db_dict.get(result)
         for item in car_record.items():
             if type(item[1]) == type({}):
@@ -166,6 +167,7 @@ def printResult(list_result, db_dict):
 db = readDB('not_rented.txt')
 
 options = ['HLEDAT', 'PUJCIT', 'KONEC']
+
 while True:
     print('VITEJTE V NASI CAR RENTAL COMPANY')
     print('MATE NA VYBER, HLEDAT, PUJCIT, KONEC')
