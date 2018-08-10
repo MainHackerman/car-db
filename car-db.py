@@ -77,14 +77,15 @@ def delID(int_id, db_filename):
 def rentCar(int_id, rented_db_filename, not_rented_db_filename):
     if IDinDB(int_id, rented_db_filename):
         print('Car is rented')
-        return None
+        return False
     elif not IDinDB(int_id, not_rented_db_filename):
         print('ID is not valid')
-        return None
+        return False
 
     addID(int_id, rented_db_filename)
     delID(int_id, not_rented_db_filename)
 
+    return True
 
 
 def compare(val1, val2, symbol):
@@ -130,7 +131,7 @@ def getMore(db_dict, conditions):
     return list(set.intersection(*matches))
 
 
-def getFromat(list_result, db_dict):
+def getFormat(list_result, db_dict):
     to_format = []
     for result in list_result:
         car = []
@@ -147,27 +148,22 @@ def getFromat(list_result, db_dict):
 
     return to_format
 
+
 def printResult(list_result, db_dict):
-    cont_to_format = getFromat(list_result, db_dict)
-    beg = ' VYSLEDEK VASEHO HLEDANI:\n' + 40*'='+'\n'
-    row_to_format = ''' |{} : {}| '''
+    cont_to_format = getFormat(list_result, db_dict)
+    beg = ' VYSLEDEK VASEHO HLEDANI:\n' + 45*'='+'\n'
+    row_to_format = '''|{: ^20} : {: ^20}|'''
     cont_str = ''
     end = 'DEKUJEME ZA VYUZITI NASEHO SYSTEMU'
     for lst in cont_to_format:
         for pair in lst:
             cont_str = cont_str + row_to_format.format(*pair) + '\n'
-        cont_str = cont_str + 40*'='+ '\n'
+        cont_str = cont_str + 45*'='+ '\n'
 
     return beg + cont_str + end
 
-listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
+#listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
 db = readDB('not_rented.txt')
-print(len(db.keys()))
-print(db)
-skoda = getCar('vykon', '76', '>=', db)
-print(skoda)
-print(getMore(db, [('znacka', 'skoda', '=='), ('vykon', '100', '>')]))
-print(printResult(skoda, db))
 
 options = ['HLEDAT', 'PUJCIT', 'KONEC']
 while True:
@@ -190,7 +186,18 @@ while True:
             tuples.append(tup)
             if inp == ['']:
                 break
-
         s_result = getMore(db, tuples)
         print(printResult(s_result,db))
+
+    elif vyber == options[1]:
+        print('Rozhodli jste si půjčit auto, skvělé!')
+        rent_id = input('Zadejte ID auta prosím: ')
+        if rentCar(int(rent_id), 'rented.txt','not_rented.txt'):
+            print('Gratulujeme! Máte zarezervované auto číslo', rent_id)
+        pass
+
+    elif vyber == options[2]:
+        print('KONEC')
         break
+    else:
+        print('Chybna volba')
