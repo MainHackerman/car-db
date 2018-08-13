@@ -186,9 +186,14 @@ while True:
                 inp = [input('Zadej ' + item + ' :\n')]
                 if not inp[0]:
                     break
+                elif len(inp) == 2 and not inp[2]:
+                    break
+                elif len(inp) == 3 and not inp[2]:
+                    break
                 tup = tup + tuple(inp)
             tuples.append(tup)
-            if not inp[0]:
+            if not len(tup) == 3:
+                del tuples[-1]
                 break
         s_result = getMore(db, tuples)
         print(printResult(s_result, db))
