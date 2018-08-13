@@ -128,6 +128,8 @@ def getMore(db_dict, conditions):
             break
         #matches.append(set(getCar(condition[0], condition[1], condition[2], db_dict)))
         matches.append(set(getCar(*condition, db_dict)))
+    if not matches:
+        return []
 
     return list(set.intersection(*matches))
 
@@ -186,7 +188,7 @@ while True:
                     break
                 tup = tup + tuple(inp)
             tuples.append(tup)
-            if inp == ['']:
+            if not inp[0]:
                 break
         s_result = getMore(db, tuples)
         print(printResult(s_result, db))
