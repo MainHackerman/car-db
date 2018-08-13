@@ -126,7 +126,8 @@ def getMore(db_dict, conditions):
     for condition in conditions:
         if not condition:
             break
-        matches.append(set(getCar(condition[0], condition[1], condition[2], db_dict)))
+        #matches.append(set(getCar(condition[0], condition[1], condition[2], db_dict)))
+        matches.append(set(getCar(*condition, db_dict)))
 
     return list(set.intersection(*matches))
 
@@ -164,9 +165,7 @@ def printResult(list_result, db_dict):
     return beg + cont_str + end
 
 
-#listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
 db = readDB('not_rented.txt')
-print(db)
 
 options = ['HLEDAT', 'PUJCIT', 'KONEC']
 
@@ -186,12 +185,11 @@ while True:
                 if inp == ['']:
                     break
                 tup = tup + tuple(inp)
-                print('tup',tup)
             tuples.append(tup)
             if inp == ['']:
                 break
         s_result = getMore(db, tuples)
-        print(printResult(s_result,db))
+        print(printResult(s_result, db))
 
     elif vyber == options[1]:
         print('Rozhodli jste si půjčit auto, skvělé!')
