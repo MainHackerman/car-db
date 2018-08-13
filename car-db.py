@@ -13,15 +13,15 @@ def decode(filename):
     for pair in rows:
 
         if pair:
-            if not pair.split('=')[1]:
-                decoded[pair.split('=')[0]] = {}
-                dictionary = pair.split('=')[0]
-            elif pair.split('=')[0][0] == ' ' and dictionary:
-                polozky = pair.split('=')
-                decoded[dictionary].update({polozky[0][4:]: polozky[1]})
+            key = pair.split('=')[0]
+            value = pair.split('=')[1]
+            if not value:
+                decoded.update({key: {}})
+                dictionary = key
+            elif key[0] == ' ' and dictionary:
+                decoded.get(dictionary).update({key[4:]: value})
             else:
-                polozky = pair.split('=')
-                decoded[polozky[0]] = polozky[1]
+                decoded.update({key: value})
                 dictionary = {}
 
     return decoded
@@ -163,8 +163,10 @@ def printResult(list_result, db_dict):
 
     return beg + cont_str + end
 
+
 #listofkeys = ['znacka', 'model', 'rv', {'tech': ['vykon', 'spotreba', 'palivo', 'prevodovka']}, 'kategorie', 'cena']
 db = readDB('not_rented.txt')
+print(db)
 
 options = ['HLEDAT', 'PUJCIT', 'KONEC']
 
