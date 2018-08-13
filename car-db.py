@@ -173,8 +173,9 @@ options = ['HLEDAT', 'PUJCIT', 'KONEC']
 
 while True:
     print('VITEJTE V NASI CAR RENTAL COMPANY')
-    print('MATE NA VYBER, HLEDAT, PUJCIT, KONEC')
+    print('MATE NA VYBER, HLEDAT: PUJCIT, KONEC')
     vyber = input('ZADEJ VOLBU: ').upper()
+
     if vyber == options[0]:
         comp_items = ['POLOŽKA', 'HODNOTA', 'ZNAMENKO']
         tuples = []
