@@ -196,6 +196,11 @@ while True:
     elif vyber == options[1]:
         print('Rozhodli jste si půjčit auto, skvělé!')
         rent_id = input('Zadejte ID auta prosím: ')
+
+        if not rent_id.isdigit():
+            print('Input is not a number')
+            continue
+
         if rentCar(int(rent_id), 'rented.txt','not_rented.txt'):
             print('Gratulujeme! Máte zarezervované auto číslo', rent_id)
         pass
