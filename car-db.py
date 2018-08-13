@@ -184,7 +184,7 @@ while True:
             print('Vyhledavani v nasi databazi.\nZadej v jake kategorii hledas co a potom znamenko porovnavani')
             for item in comp_items:
                 inp = [input('Zadej ' + item + ' :\n')]
-                if inp == ['']:
+                if not inp[0]:
                     break
                 tup = tup + tuple(inp)
             tuples.append(tup)
