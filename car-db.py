@@ -217,6 +217,7 @@ while True:
         print('THANK YOU FOR USING OUR SERVICES, GOOD BYE')
         break
     elif vyber == options[3]:
+        print('ALL OUR CARS:')
         print(printResult(list(db.keys()), db))
 
     else:
