@@ -39,7 +39,7 @@ def readDB(db_file):
     f.close()
     for row in rows:
         if row != '\n':
-            db.update({row: decode(row + '.txt')})
+            db.update({row: decode('files/' + row + '.txt')})
     return db
 
 
@@ -167,13 +167,13 @@ def printResult(list_result, db_dict):
     return beg + cont_str + end
 
 
-db = readDB('not_rented.txt')
+db = readDB('files/not_rented.txt')
 
-options = ['SEARCH', 'RENT', 'QUIT']
+options = ['SEARCH', 'RENT', 'QUIT', 'SHOW ALL']
 
 while True:
     print('WLECOME TO CAR RENTAL COMPANY')
-    print('YOU CAN: SEARCH, RENT, QUIT')
+    print('YOU CAN: SHOW ALL, SEARCH, RENT, QUIT')
     vyber = input('STATE YOUR DECISION: ').upper()
 
     if vyber == options[0]:
@@ -183,6 +183,8 @@ while True:
             tup = ()
             inp = 0
             print('SEARCHING OUR DATABASE.\nEnter in which category do you search, what you search and how should it compare to value in database.')
+            print('Prices are displayed per day, consumtion in liters per 100km.')
+            print('To exit and confirm search leave empty space and press enter.')
             for item in comp_items:
                 inp = [input('Enter ' + item + ' :\n')]
                 if not inp[0]:
@@ -207,12 +209,15 @@ while True:
             print('Input is not a number')
             continue
 
-        if rentCar(int(rent_id), 'rented.txt','not_rented.txt'):
+        if rentCar(int(rent_id), 'files/rented.txt','files/not_rented.txt'):
             print('CONGRATULATIONS! YOU HAVE RESERVED CAR NUMBER ', rent_id)
         pass
 
     elif vyber == options[2]:
         print('THANK YOU FOR USING OUR SERVICES, GOOD BYE')
         break
+    elif vyber == options[3]:
+        print(printResult(list(db.keys()), db))
+
     else:
         print('Choice not in menu.')
