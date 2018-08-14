@@ -174,9 +174,9 @@ options = ['SEARCH', 'RENT', 'QUIT', 'SHOW ALL']
 while True:
     print('WLECOME TO CAR RENTAL COMPANY')
     print('YOU CAN: SHOW ALL, SEARCH, RENT, QUIT')
-    vyber = input('STATE YOUR DECISION: ').upper()
+    pick = input('STATE YOUR DECISION: ').upper()
 
-    if vyber == options[0]:
+    if pick == options[0]:
         comp_items = ['ITEM', 'VALUE', 'COMPARISON SING']
         tuples = []
         while True:
@@ -201,7 +201,7 @@ while True:
         s_result = getMore(db, tuples)
         print(printResult(s_result, db))
 
-    elif vyber == options[1]:
+    elif pick == options[1]:
         print('You decided to rent a car, great choice!')
         rent_id = input('Enter ID of car: ')
 
@@ -213,10 +213,10 @@ while True:
             print('CONGRATULATIONS! YOU HAVE RESERVED CAR NUMBER ', rent_id)
         pass
 
-    elif vyber == options[2]:
+    elif pick == options[2]:
         print('THANK YOU FOR USING OUR SERVICES, GOOD BYE')
         break
-    elif vyber == options[3]:
+    elif pick == options[3]:
         print('ALL OUR CARS:')
         print(printResult(list(db.keys()), db))
 
