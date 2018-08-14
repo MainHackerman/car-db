@@ -155,10 +155,10 @@ def getFormat(list_result, db_dict):
 
 def printResult(list_result, db_dict):
     cont_to_format = getFormat(list_result, db_dict)
-    beg = ' VYSLEDEK VASEHO HLEDANI:\n' + 45*'='+'\n'
+    beg = ' RESULT OF YOUR SEARCH:\n' + 45*'='+'\n'
     row_to_format = '''|{: ^20} : {: ^20}|'''
     cont_str = ''
-    end = 'DEKUJEME ZA VYUZITI NASEHO SYSTEMU'
+    end = 'THANK YOU FOR USING OUR SYSTEM'
     for lst in cont_to_format:
         for pair in lst:
             cont_str = cont_str + row_to_format.format(*pair) + '\n'
@@ -169,22 +169,22 @@ def printResult(list_result, db_dict):
 
 db = readDB('not_rented.txt')
 
-options = ['HLEDAT', 'PUJCIT', 'KONEC']
+options = ['SEARCH', 'RENT', 'QUIT']
 
 while True:
-    print('VITEJTE V NASI CAR RENTAL COMPANY')
-    print('MATE NA VYBER, HLEDAT: PUJCIT, KONEC')
-    vyber = input('ZADEJ VOLBU: ').upper()
+    print('WLECOME TO CAR RENTAL COMPANY')
+    print('YOU CAN: SEARCH, RENT, QUIT')
+    vyber = input('STATE YOUR DECISION: ').upper()
 
     if vyber == options[0]:
-        comp_items = ['POLOŽKA', 'HODNOTA', 'ZNAMENKO']
+        comp_items = ['ITEM', 'VALUE', 'COMPARISON SING']
         tuples = []
         while True:
             tup = ()
             inp = 0
-            print('Vyhledavani v nasi databazi.\nZadej v jake kategorii hledas co a potom znamenko porovnavani')
+            print('SEARCHING OUR DATABASE.\nEnter in which category do you search, what you search and how should it compare to value in database.')
             for item in comp_items:
-                inp = [input('Zadej ' + item + ' :\n')]
+                inp = [input('Enter ' + item + ' :\n')]
                 if not inp[0]:
                     break
                 elif len(inp) == 2 and not inp[2]:
@@ -200,19 +200,19 @@ while True:
         print(printResult(s_result, db))
 
     elif vyber == options[1]:
-        print('Rozhodli jste si půjčit auto, skvělé!')
-        rent_id = input('Zadejte ID auta prosím: ')
+        print('You decided to rent a car, great choice!')
+        rent_id = input('Enter ID of car: ')
 
         if not rent_id.isdigit():
             print('Input is not a number')
             continue
 
         if rentCar(int(rent_id), 'rented.txt','not_rented.txt'):
-            print('Gratulujeme! Máte zarezervované auto číslo', rent_id)
+            print('CONGRATULATIONS! YOU HAVE RESERVED CAR NUMBER ', rent_id)
         pass
 
     elif vyber == options[2]:
-        print('KONEC')
+        print('THANK YOU FOR USING OUR SERVICES, GOOD BYE')
         break
     else:
-        print('Chybna volba')
+        print('Choice not in menu.')
