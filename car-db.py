@@ -221,4 +221,4 @@ while True:
         print(printResult(list(db.keys()), db))
 
     else:
-        print('Choice not in menu.')
+        print('Wrong choice - not in menu.')
