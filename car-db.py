@@ -11,7 +11,7 @@ def decode(filename):
     decoded = {}
     raw = readfile(filename)
     rows = raw.split('\n')
-    dictionary = {}
+    dictionary = ''
     for pair in rows:
 
         if pair:
@@ -24,7 +24,7 @@ def decode(filename):
                 decoded.get(dictionary).update({key[4:]: value})
             else:
                 decoded.update({key: value})
-                dictionary = {}
+                dictionary = ''
 
     return decoded
 
