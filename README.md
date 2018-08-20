@@ -1,19 +1,32 @@
-# car-db
+# Car Rental Database
 
-### Functionality
+### General description
 Database based on two types of file:
 - List of records file
     - Each line - one record file
 - Records file
     - file with special structure representing one record in DB.
 
-Program works as DBMS for car rental company database. The program shall manage not rented and rented cars. 
-Proram shall output nice forms with information about cars:
-- not rented cars based on category, brand, consumption, power, year of manufacturing, transmission or fuel type.
-- rented cars based on category, brand, consumption, power, year of manufacturing, transmission or fuel type.
-- **EXTRA** combined select
+Program works as a reservation system for car rental company database. The program can search the database and output nice tables with all information about cars.
+User shall make a reservation for a car. Program can exit on user input.
 
-The database files will be provided for the student.  
+The database files will be provided for the student.
+
+The program is user friendlyu - everything user needs is printed out.
+
+#### Search capabilities
+- compares keys (categories ex.:  brand, model..) and values entered by user with keys and values in database. 
+- user shall decide how entered and database values are compared
+    - example 1: When searching for specific brand user inputs: brand, actual brand name (ex: Mazda), == (user input and database value should be equal)
+    - example 2: When searching cars with more than 100kW of power. Intput: power, 100, > (user input greater then datase value)  
+- user can perform search based on multiple conditions 
+
+#### Print capabilites
+- Program outputs search results **or** all availible cars
+- printing is done via formated strings
+- output looks like table
+- when multiple cars are selected, on output it can be easily distinguished between them
+- output contains all information about car found in database + it's ID
 
 #### List of records file structure
 - one line one file
