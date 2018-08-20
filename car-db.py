@@ -1,3 +1,4 @@
+# Reads a given file
 def readfile(filename):
     s = open(filename)
     content = s.read()
@@ -5,6 +6,7 @@ def readfile(filename):
     return content
 
 
+# Reads file with car info and create a dictionary from that
 def decode(filename):
     decoded = {}
     raw = readfile(filename)
@@ -27,6 +29,7 @@ def decode(filename):
     return decoded
 
 
+# Takes file with car IDs and creates dictionaries with keys representing ÍDs and values dictionaries including car info as returned by decode()
 def readDB(db_file):
     db = {}
     f = open(db_file)
@@ -43,6 +46,7 @@ def readDB(db_file):
     return db
 
 
+# Checks if given ID is in ID file
 def IDinDB(int_id, db_filename):
     f = open(db_filename)
     for row in f:
@@ -56,12 +60,14 @@ def IDinDB(int_id, db_filename):
         return False
 
 
+# Adds ID to a file
 def addID(int_id, db_filename):
     f = open(db_filename, 'a')
     f.write('\n' + str(int_id))
     f.close()
 
 
+# Removes ID from a file
 def delID(int_id, db_filename):
     f = open(db_filename)
     cont = f.read().split('\n')
@@ -74,6 +80,7 @@ def delID(int_id, db_filename):
     f.close()
 
 
+# Moves ID from one ID file to another, checks if the ID is already present in taget file or if ID even exists
 def rentCar(int_id, rented_db_filename, not_rented_db_filename):
     if IDinDB(int_id, rented_db_filename):
         print('Car is rented')
@@ -88,8 +95,9 @@ def rentCar(int_id, rented_db_filename, not_rented_db_filename):
     return True
 
 
+# Compares two given values with given comparison sign
 def compare(val1, val2, symbol):
-    #<,>,<=,>=, ==
+    # <,>,<=,>=, ==
     if val1.isdigit() and val2.isdigit():
         val1, val2 = float(val1), float(val2)
     if symbol == '<':
@@ -107,6 +115,7 @@ def compare(val1, val2, symbol):
         return False
 
 
+# Returns list of car IDs which comply given condition
 def getCar(key, value, comp_symbol, db_dict):
     ID_list = []
     for car in db_dict.items():
@@ -120,13 +129,13 @@ def getCar(key, value, comp_symbol, db_dict):
     return ID_list
 
 
+# Returns list of car IDs which comply given multiple conditions
 def getMore(db_dict, conditions):
-    #One condition shall be tuple including key, value, comp sign
+    # One condition shall be tuple including key, value, comp sign
     matches = []
     for condition in conditions:
         if not condition:
             break
-        #matches.append(set(getCar(condition[0], condition[1], condition[2], db_dict)))
         matches.append(set(getCar(*condition, db_dict)))
     if not matches:
         return []
@@ -134,6 +143,7 @@ def getMore(db_dict, conditions):
     return list(set.intersection(*matches))
 
 
+# Retruns list of list of tuples. Each nested list represents one car, each nested tuple in this list includes key and its value of a "car" dict
 def getFormat(list_result, db_dict):
     to_format = []
     for result in list_result:
@@ -153,8 +163,10 @@ def getFormat(list_result, db_dict):
     return to_format
 
 
+# Returns nice formated string for printing. Constructed from given car ID list.
 def printResult(list_result, db_dict):
     cont_to_format = getFormat(list_result, db_dict)
+    print(cont_to_format)
     beg = ' RESULT OF YOUR SEARCH:\n' + 45*'='+'\n'
     row_to_format = '''|{: ^20} : {: ^20}|'''
     cont_str = ''
