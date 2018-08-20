@@ -32,16 +32,10 @@ def decode(filename):
 # Takes file with car IDs and creates dictionaries with keys representing ÍDs and values dictionaries including car info as returned by decode()
 def readDB(db_file):
     db = {}
-    f = open(db_file)
-    rows = []
-    for row in f:
-        if row[-1] == '\n':
-            rows.append(row[:-1])
-        else:
-            rows.append(row)
-    f.close()
+    raw = readfile(db_file)
+    rows = raw.split('\n')
     for row in rows:
-        if row != '\n':
+        if row:
             db.update({row: decode('files/' + row + '.txt')})
     return db
 
