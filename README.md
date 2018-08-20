@@ -12,7 +12,7 @@ User shall make a reservation for a car. Program can exit on user input.
 
 The database files will be provided for the student.
 
-The program is user friendlyu - everything user needs is printed out.
+The program is user friendly - everything user needs is printed out.
 
 #### Search capabilities
 - compares keys (categories ex.:  brand, model..) and values entered by user with keys and values in database. 
