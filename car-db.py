@@ -172,6 +172,7 @@ def printResult(list_result, db_dict):
 
     return beg + cont_str + end
 
+# BODY OF THE PROGRAM
 
 db = readDB('files/not_rented.txt')
 
