@@ -113,13 +113,13 @@ def compare(val1, val2, symbol):
 def getCar(key, value, comp_symbol, db_dict):
     ID_list = []
     for car in db_dict.items():
-        for car_item in list(car)[1].items():
+        for car_item in car[1].items():
             if type(car_item[1]) == type({}):
                 for car_nested_item in car_item[1].items():
                     if car_nested_item[0] == str(key) and compare(car_nested_item[1], str(value), comp_symbol):
-                        ID_list.append(list(car)[0])
+                        ID_list.append(car[0])
             if car_item[0] == str(key) and compare(car_item[1], str(value), comp_symbol):
-                ID_list.append(list(car)[0])
+                ID_list.append(car[0])
     return ID_list
 
 
