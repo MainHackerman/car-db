@@ -162,7 +162,7 @@ def printResult(list_result, db_dict):
     cont_to_format = getFormat(list_result, db_dict)
     print(cont_to_format)
     beg = ' RESULT OF YOUR SEARCH:\n' + 45*'='+'\n'
-    row_to_format = '''|{: ^20} : {: ^20}|'''
+    row_to_format = '|{: ^20} : {: ^20}|'
     cont_str = ''
     end = 'THANK YOU FOR USING OUR SYSTEM'
     for lst in cont_to_format:
