@@ -191,7 +191,7 @@ while True:
             inp = 0
             print('SEARCHING OUR DATABASE.\nEnter in which category do you search, what you search and how should it compare to value in database.')
             print('Prices are displayed per day, consumtion in liters per 100km.')
-            print('To exit and confirm search leave empty space and press enter.')
+            print('To exit and confirm search leave empty space (do not enter anything) and press enter.')
             for item in comp_items:
                 inp = [input('Enter ' + item + ' :\n')]
                 if not inp[0]:
