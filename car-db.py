@@ -129,7 +129,7 @@ def getMore(db_dict, conditions):
     matches = []
     for condition in conditions:
         if not condition:
-            break
+            continue
         matches.append(set(getCar(*condition, db_dict)))
     if not matches:
         return []
